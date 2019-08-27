@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<script>
+
+  function getUrlVars() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+        vars[key] = value;
+    });
+    return vars;
+  }
+
+  function getUrlParam(parameter, defaultvalue){
+    var urlparameter = defaultvalue;
+    if(window.location.href.indexOf(parameter) > -1){
+        urlparameter = getUrlVars()[parameter];
+        }
+    return urlparameter;
+  }
+
+  function setup() {
+    var mytext = getUrlParam('mega','Empty');
+    document.getElementById('megaLinkText').innerText = mytext;
+    document.getElementById('megaLinkText').href = mytext;
+  }
+</script>
+
+<style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: black;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Add padding to containers */
+.container {
+  padding: 16px;
+  background-color: white;
+  width: 100%
+}
+
+/* Full-width input fields */
+input[type=text], input[type=password], input[type=number] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+input[type=text]:focus, input[type=password]:focus, input[type=number]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Overwrite default styles of hr */
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+
+/* Set a style for the submit button */
+.registerbtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+.registerbtn:hover {
+  opacity: 1;
+}
+
+/* Add a blue text color to links */
+a {
+  color: dodgerblue;
+}
+
+/* Set a grey background color and center the text of the "sign in" section */
+.signin {
+  background-color: #f1f1f1;
+  text-align: center;
+}
+</style>
+</head>
+<body onload="setup()"> 
+
+<form action="sunday-website.php" method="post">
+  <div class="container">
+    <h1>Please Add Tags for: <br> <a href="" id="megaLinkText"></a> </h1>
+    <p>Click submit when you are finished.</p>
+    <hr>
+
+    <label for="Artist"><b>Artist</b></label>
+    <input type="text" placeholder="Enter Artist" name="artist" required>
+
+    <label for="Album"><b>Album</b></label>
+    <input type="text" placeholder="Enter Album Title" name="album" required>
+
+    <label for="Year"><b>Year (Optional)</b></label>
+    <input type="number" placeholder="Enter Year Released" name="year" required>
+
+    <label for="FileType"><b>File Type</b></label>
+    <input type="text" placeholder="Enter File Type" name="filetype" required>
+    <hr>
+
+    <button type="submit" class="registerbtn">Submit</button>
+  </div>
+  
+</form>
+
+</body>
+</html>
