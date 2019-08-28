@@ -67,9 +67,19 @@ input[type=text]:focus, input[type=password]:focus, input[type=number]:focus {
   outline: none;
 }
 
+/* Overwrite default styles of textarea */
 textarea{
+  padding: 15px;
   margin: 5px 0 0 0;
-  width: 100%
+  width: 100%;
+  background: #f1f1f1;
+  font-family: Arial;
+  border: none;
+  height: 100px
+}
+
+textarea:focus{
+  background: #ddd;
 }
 
 /* Overwrite default styles of hr */
@@ -130,7 +140,7 @@ a {
     <input type="text" placeholder="Enter Genre" name="genre" >
 
     <label for="Description"><b>Description (Optional)</b></label><br>
-    <textarea name="description" ></textarea>
+    <textarea name="description" placeholder="Enter Description"></textarea>
 
     <hr>
     <button type="submit" class="registerbtn">Submit</button>
