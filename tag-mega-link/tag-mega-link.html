@@ -22,9 +22,11 @@
   }
 
   function setup() {
-    var mytext = getUrlParam('mega','Empty');
-    document.getElementById('megaLinkText').innerText = mytext;
-    document.getElementById('megaLinkText').href = mytext;
+    var megalink = getUrlParam('mega','Empty');
+    document.getElementById('megaLinkText').innerText = megalink;
+    document.getElementById('megaLinkText').href = megalink;
+
+    document.getElementById('descriptionInput')
   }
 </script>
 
@@ -45,6 +47,11 @@ body {
   width: 100%
 }
 
+.test {
+  padding: 30px;
+  background: #4CAF50;
+}
+
 /* Full-width input fields */
 input[type=text], input[type=password], input[type=number] {
   width: 100%;
@@ -58,6 +65,11 @@ input[type=text], input[type=password], input[type=number] {
 input[type=text]:focus, input[type=password]:focus, input[type=number]:focus {
   background-color: #ddd;
   outline: none;
+}
+
+textarea{
+  margin: 5px 0 0 0;
+  width: 100%
 }
 
 /* Overwrite default styles of hr */
@@ -108,13 +120,19 @@ a {
     <label for="Album"><b>Album</b></label>
     <input type="text" placeholder="Enter Album Title" name="album" required>
 
-    <label for="Year"><b>Year (Optional)</b></label>
-    <input type="number" placeholder="Enter Year Released" name="year" required>
-
     <label for="FileType"><b>File Type</b></label>
     <input type="text" placeholder="Enter File Type" name="filetype" required>
-    <hr>
 
+    <label for="Year"><b>Year (Optional)</b></label>
+    <input type="number" placeholder="Enter Year Released" name="year" >
+
+    <label for="Genre"><b>Genre (Optional)</b></label>
+    <input type="text" placeholder="Enter Genre" name="genre" >
+
+    <label for="Description"><b>Description (Optional)</b></label><br>
+    <textarea name="description" ></textarea>
+
+    <hr>
     <button type="submit" class="registerbtn">Submit</button>
   </div>
   
