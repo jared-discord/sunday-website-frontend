@@ -7,7 +7,7 @@ year: <?php echo $_POST["year"]; ?><br>
 file type: <?php echo $_POST["filetype"]; ?><br>
 
 results: <?php 
-    $command = escapeshellcmd('hello.py');
+    $command = escapeshellcmd('./hello.py');
     $output = shell_exec($command);
     echo "$output";
 ?>
