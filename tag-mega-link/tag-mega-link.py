@@ -6,6 +6,8 @@ import sys
 import fileinput 
 import requests
 
+print ("in progress")
+
 sys.argv.pop(0) #pop filename at head of argv list
 postData = {} #data which we will send in our post request to the discrod bot
 i = 0
