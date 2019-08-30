@@ -15,6 +15,6 @@ while(i < len(sys.argv)-1): #build the post data dictionary from the command lin
     postData[sys.argv[i]] = sys.argv[i+1]
     i += 2
 
-r = requests.post(url = "0.0.0.0:" + portNum + "/post-tagged-mega", data = postData)
+r = requests.post(url = "http://0.0.0.0:" + portNum + "/post-tagged-mega", data = postData)
 response = r.text
 print(response)
