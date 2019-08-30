@@ -29,6 +29,9 @@
 
     var server = getUrlParam('server', 'Empty');
     document.getElementById('serverInput').value = server;
+
+    var msgid = getUrlParam('msgid', 'Empty');
+    document.getElementById('msgidInput').value = msgid;
   }
 </script>
 
@@ -140,8 +143,10 @@ a {
     <textarea name="description" placeholder="Enter Description"></textarea>
 
     <input id="megaInput" type="hidden" name="mega">
-    
+
     <input id="serverInput" type="hidden" name="server">
+
+    <input id="msgidInput" type="hidden" name="msgid">
 
     <hr>
     <button type="submit" class="registerbtn">Submit</button>
