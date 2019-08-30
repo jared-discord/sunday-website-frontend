@@ -6,7 +6,7 @@ import sys
 import fileinput 
 import requests
 
-print ("in progress")
+portNum = "8080"
 
 sys.argv.pop(0) #pop filename at head of argv list
 postData = {} #data which we will send in our post request to the discrod bot
@@ -15,6 +15,6 @@ while(i < len(sys.argv)-1): #build the post data dictionary from the command lin
     postData[sys.argv[i]] = sys.argv[i+1]
     i += 2
 
-r = requests.post(url = "127.0.0.1:PORTNUMBER", data = postData)
+r = requests.post(url = "127.0.0.1:" + portNum + "/post-tagged-mega", data = postData)
 response = r.text
 print(response)

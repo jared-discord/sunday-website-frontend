@@ -25,6 +25,10 @@
     var megalink = getUrlParam('mega','Empty');
     document.getElementById('megaLinkText').innerText = megalink;
     document.getElementById('megaLinkText').href = megalink;
+    document.getElementById('megaInput').value = megalink;
+
+    var server = getUrlParam('server', 'Empty');
+    document.getElementById('serverInput').value = server;
   }
 </script>
 
@@ -134,6 +138,10 @@ a {
 
     <label for="Description"><b>Description (Optional)</b></label><br>
     <textarea name="description" placeholder="Enter Description"></textarea>
+
+    <input id="megaInput" type="hidden" name="mega">
+    
+    <input id="serverInput" type="hidden" name="server">
 
     <hr>
     <button type="submit" class="registerbtn">Submit</button>
