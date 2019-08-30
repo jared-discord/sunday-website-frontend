@@ -5,6 +5,7 @@
 import sys
 import fileinput 
 import requests
+import json
 
 portNum = "8080"
 
@@ -15,7 +16,8 @@ while(i < len(sys.argv)-1): #build the post data dictionary from the command lin
     postData[sys.argv[i]] = sys.argv[i+1]
     i += 2
 
-r = requests.post(url = "http://0.0.0.0:" + portNum + "/post-tagged-mega", data = postData)
+headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
+r = requests.post(url = "http://0.0.0.0:" + portNum + "/post-tagged-mega", data=json.dumps(postData), headers=headers)
 response = r.text
 print(response)
 
