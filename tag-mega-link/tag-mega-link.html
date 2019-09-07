@@ -35,8 +35,14 @@
 
   }
 
-  //var obj = document.createElement('select');
-  //obj.style["-webkit-background-size"] = "100px"
+  function backgroundSetup(){
+    var totalCount = 18;
+    var num = Math.ceil( Math.random() * totalCount );
+    document.body.style.backgroundImage = "url('bgimages/" + num + ".gif')"
+
+    //document.body.style.backgroundImage = "url('https://i.imgur.com/2grnPtW.gif')";
+  }
+
   //https://stackoverflow.com/questions/5195303/set-css-property-in-javascript
   //https://stackoverflow.com/questions/15231812/random-background-images-css3
 </script>
@@ -56,19 +62,23 @@ body {
   padding: 16px;
   background-color: white;
   width: 500px; /*width: 50%*/
-  height: 550px;
-  top: 15px;
-  left: 15px;
+  height: 95vh;
+  top: 10px;
+  left: 10px;
   position: relative;
-  opacity: 0.8;
+  opacity: 0.9;
   box-shadow: 8px 4px 8px 0 rgba(0, 0, 0, 0.2), 8px 6px 20px 0 rgba(0, 0, 0, 0.19);
   resize:both;
   overflow:auto;
   
 }
 
+
+
+
 .backgroundStyle {
-  background: url("https://i.imgur.com/2grnPtW.gif") no-repeat top center fixed; 
+  /*background: url("https://i.imgur.com/2grnPtW.gif") no-repeat top center fixed;*/
+  background: url("") no-repeat top center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -147,11 +157,11 @@ a {
 }
 </style>
 </head>
-<body onload="setup()" class="backgroundStyle"> <!--background="https://i.imgur.com/PlLrpy0.gif">  -->
+<body onload="setup()" class="backgroundStyle" > <!-- class="backgroundStyle" -->
 
 <form action="tag-mega-link.php" method="post">
   
-    <div class="container">
+    <div id = "container" class="container">
       <p2 style="font-size: 150%;font-weight: bold">Please Add Tags for: </p2>
       <br> <a href="" id="megaLinkText"></a>
       <p>Click submit when you are finished.</p>
@@ -189,4 +199,14 @@ a {
 </form>
 
 </body>
+<script type="text/javascript"> 
+  backgroundSetup();
+  if (window.innerWidth < 600){
+    document.getElementById("container").style.width = "98%";
+    document.getElementById("container").style.height = "98vh";
+    document.getElementById("container").style.top = "0px";
+    document.getElementById("container").style.left = "0px";
+    document.getElementById("container").style.margin = "auto";
+  }
+</script> 
 </html>
