@@ -157,7 +157,7 @@ a {
 }
 </style>
 </head>
-<body onload="setup()" class="backgroundStyle" > <!-- class="backgroundStyle" -->
+<body class="backgroundStyle" > <!-- onload="setup()" class="backgroundStyle" -->
 
 <form action="tag-mega-link.php" method="post">
   
@@ -200,6 +200,7 @@ a {
 
 </body>
 <script type="text/javascript"> 
+  setup();
   backgroundSetup();
   if (window.innerWidth < 600){
     document.getElementById("container").style.width = "98%";
