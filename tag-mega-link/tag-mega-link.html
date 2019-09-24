@@ -4,7 +4,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <script>
-
   function getUrlVars() {
     var vars = {};
     var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
@@ -26,25 +25,18 @@
     document.getElementById('megaLinkText').innerText = megalink;
     document.getElementById('megaLinkText').href = megalink;
     document.getElementById('megaInput').value = megalink;
-
     var server = getUrlParam('server', 'Empty');
     document.getElementById('serverInput').value = server;
-
     var msgid = getUrlParam('msgid', 'Empty');
     document.getElementById('msgidInput').value = msgid;
-
   }
 
   function backgroundSetup(){
     var totalCount = 18;
     var num = Math.ceil( Math.random() * totalCount );
     document.body.style.backgroundImage = "url('bgimages/" + num + ".gif')"
-
     //document.body.style.backgroundImage = "url('https://i.imgur.com/2grnPtW.gif')";
   }
-
-  //https://stackoverflow.com/questions/5195303/set-css-property-in-javascript
-  //https://stackoverflow.com/questions/15231812/random-background-images-css3
 </script>
 
 <style>
@@ -70,11 +62,7 @@ body {
   box-shadow: 8px 4px 8px 0 rgba(0, 0, 0, 0.2), 8px 6px 20px 0 rgba(0, 0, 0, 0.19);
   resize:both;
   overflow:auto;
-  
 }
-
-
-
 
 .backgroundStyle {
   /*background: url("https://i.imgur.com/2grnPtW.gif") no-repeat top center fixed;*/
@@ -132,7 +120,6 @@ hr {
 /* Set a style for the submit button */
 .registerbtn {
   background-color: #e5d6f3;
-  
   padding: 16px 20px;
   margin: 8px 0;
   border: none;
@@ -159,8 +146,7 @@ a {
 </head>
 <body class="backgroundStyle" > <!-- onload="setup()" class="backgroundStyle" -->
 
-<form action="tag-mega-link.php" method="post">
-  
+<form action="tag-mega-link.php" method="post" accept-charset="UTF-8">
     <div id = "container" class="container">
       <p2 style="font-size: 150%;font-weight: bold">Please Add Tags for: </p2>
       <br> <a href="" id="megaLinkText"></a>
@@ -194,8 +180,6 @@ a {
       <hr>
       <button type="submit" class="registerbtn" style="font-size: 20px">Submit</button>
     </div>
-  
-  
 </form>
 
 </body>
