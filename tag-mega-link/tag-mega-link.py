@@ -19,5 +19,6 @@ while(i < len(sys.argv)-1): #build the post data dictionary from the command lin
 headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
 r = requests.post(url = "http://0.0.0.0:" + portNum + "/post-tagged-mega", data=json.dumps(postData), headers=headers)
 response = r.text
+print(json.dumps(postData))
 print(response)
 
