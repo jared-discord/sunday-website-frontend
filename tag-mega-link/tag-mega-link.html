@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<script>
+  function getUrlVars() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+        vars[key] = value;
+    });
+    return vars;
+  }
+
+  function getUrlParam(parameter, defaultvalue){
+    var urlparameter = defaultvalue;
+    if(window.location.href.indexOf(parameter) > -1){
+        urlparameter = getUrlVars()[parameter];
+        }
+    return urlparameter;
+  }
+
+  function setup() {
+    var megalink = getUrlParam('mega','Empty');
+    document.getElementById('megaLinkText').innerText = megalink;
+    document.getElementById('megaLinkText').href = megalink;
+    document.getElementById('megaInput').value = megalink;
+    var server = getUrlParam('server', 'Empty');
+    document.getElementById('serverInput').value = server;
+    var msgid = getUrlParam('msgid', 'Empty');
+    document.getElementById('msgidInput').value = msgid;
+  }
+
+  function backgroundSetup(){
+    var totalCount = 18;
+    var num = Math.ceil( Math.random() * totalCount );
+    document.body.style.backgroundImage = "url('bgimages/" + num + ".gif')"
+    //document.body.style.backgroundImage = "url('https://i.imgur.com/2grnPtW.gif')";
+  }
+</script>
+
+<style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: black;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Add padding to containers */
+.container {
+  padding: 16px;
+  background-color: white;
+  width: 500px; /*width: 50%*/
+  height: 95vh;
+  top: 10px;
+  left: 10px;
+  position: relative;
+  opacity: 0.9;
+  box-shadow: 8px 4px 8px 0 rgba(0, 0, 0, 0.2), 8px 6px 20px 0 rgba(0, 0, 0, 0.19);
+  resize:both;
+  overflow:auto;
+}
+
+.backgroundStyle {
+  /*background: url("https://i.imgur.com/2grnPtW.gif") no-repeat top center fixed;*/
+  background: url("") no-repeat top center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  
+  /*
+  background-image:url("https://i.imgur.com/2grnPtW.gif");
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position: top left;
+  position: relative;
+  resize: none;*/
+}
+
+/* Full-width input fields */
+input[type=text], input[type=password], input[type=number] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+input[type=text]:focus, input[type=password]:focus, input[type=number]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Overwrite default styles of textarea */
+textarea{
+  padding: 15px;
+  margin: 5px 0 0 0;
+  width: 100%;
+  background: #f1f1f1;
+  font-family: Arial;
+  border: none;
+  height: 100px
+}
+
+textarea:focus{
+  background: #ddd;
+}
+
+/* Overwrite default styles of hr */
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 20px;
+}
+
+/* Set a style for the submit button */
+.registerbtn {
+  background-color: #e5d6f3;
+  padding: 16px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+.registerbtn:hover {
+  opacity: 1;
+}
+
+/* Add a blue text color to links */
+a {
+  color: dodgerblue;
+}
+
+/* Set a grey background color and center the text of the "sign in" section */
+.signin {
+  background-color: #f1f1f1;
+  text-align: center;
+}
+</style>
+</head>
+<body class="backgroundStyle" > <!-- onload="setup()" class="backgroundStyle" -->
+
+<form action="tag-mega-link.php" method="post" accept-charset="UTF-8">
+    <div id = "container" class="container">
+      <p2 style="font-size: 150%;font-weight: bold">Please Add Tags for: </p2>
+      <br> <a href="" id="megaLinkText"></a>
+      <p>Click submit when you are finished.</p>
+      <hr>
+
+      <label for="Artist"><b>Artist</b></label>
+      <input type="text" placeholder="Enter Artist" name="artist" required>
+
+      <label for="Album"><b>Album</b></label>
+      <input type="text" placeholder="Enter Album Title" name="album" required>
+
+      <label for="FileType"><b>File Type</b></label>
+      <input type="text" placeholder="Enter File Type" name="filetype" required>
+
+      <label for="Year"><b>Year (Optional)</b></label>
+      <input type="number" placeholder="Enter Year Released" name="year" >
+
+      <label for="Genre"><b>Genre (Optional)</b></label>
+      <input type="text" placeholder="Enter Genre" name="genre" >
+
+      <label for="Description"><b>Description (Optional)</b></label><br>
+      <textarea name="description" placeholder="Enter Description"></textarea>
+
+      <input id="megaInput" type="hidden" name="mega">
+
+      <input id="serverInput" type="hidden" name="server">
+
+      <input id="msgidInput" type="hidden" name="msgid">
+
+      <hr>
+      <button type="submit" class="registerbtn" style="font-size: 20px">Submit</button>
+    </div>
+</form>
+
+</body>
+<script type="text/javascript"> 
+  setup();
+  backgroundSetup();
+  if (window.innerWidth < 600){
+    document.getElementById("container").style.width = "98%";
+    document.getElementById("container").style.height = "98vh";
+    document.getElementById("container").style.top = "0px";
+    document.getElementById("container").style.left = "0px";
+    document.getElementById("container").style.margin = "auto";
+  }
+</script> 
+</html>
