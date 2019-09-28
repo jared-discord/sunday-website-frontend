@@ -4,6 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <script>
+  // used in getUrlParam()
   function getUrlVars() {
     var vars = {};
     var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
@@ -12,6 +13,7 @@
     return vars;
   }
 
+  // fetches paramter from the url
   function getUrlParam(parameter, defaultvalue){
     var urlparameter = defaultvalue;
     if(window.location.href.indexOf(parameter) > -1){
@@ -20,6 +22,7 @@
     return urlparameter;
   }
 
+  // place data from the url params in the page
   function setup() {
     var megalink = getUrlParam('mega','Empty');
     document.getElementById('megaLinkText').innerText = megalink;
@@ -31,6 +34,7 @@
     document.getElementById('msgidInput').value = msgid;
   }
 
+  // sets background to a random image stored in the bgimages folder
   function backgroundSetup(){
     var totalCount = 18;
     var num = Math.ceil( Math.random() * totalCount );
@@ -38,18 +42,27 @@
     //document.body.style.backgroundImage = "url('https://i.imgur.com/2grnPtW.gif')";
   }
 
+  // sends off everything to the bot to be constructed into a discord message and posted
   function sendToDiscordBot(){
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
-        document.getElementById("container").className = "container";
-        //document.getElementById('container').innerHTML = JSON.parse(this.responseText).response;
-        var alert = document.createElement("div");
-        alert.className = "alert alert-success";
-        alert.innerText = JSON.parse(this.responseText).response;
-        document.getElementById('container').appendChild(alert)
+        var successContainer = document.createElement("div");
+        successContainer.className = "animate-bottom"
+        successContainer.style = "display:block;"
+        successContainer.style.textAlign = "center"
+        var successText = document.createElement("p");
+        successText.innerHTML = JSON.parse(this.responseText).response + "<br>" + "&#10003";
+        successText.style.fontSize = "300%"
+        successText.style.color = "#4fffa0"
+        successContainer.appendChild(successText)
+        document.getElementById("container").innerHTML = "";
+        document.getElementById('container').appendChild(successContainer)
       }
     }
+    xhttp.onerror = function(e){
+      alert("Unknown Error Occured. Server response not received.<br>(The server hosting the bot is probably down)");
+    };
     xhttp.open("POST", "http://localhost:8080/post-tagged-mega", true);
     xhttp.setRequestHeader("Content-type", "application/json");
     const postData = JSON.stringify({
@@ -64,7 +77,9 @@
       "msgid": document.getElementsByName("msgid")[0].value
     })
     document.getElementById("container").innerHTML = "";
-    document.getElementById("container").className = "loader";
+    var loadElement = document.createElement("div");
+    loadElement.className = "loader";
+    document.getElementById("container").appendChild(loadElement);
     xhttp.send(postData);
     return false;
   }
@@ -84,7 +99,7 @@ body {
 .container {
   padding: 16px;
   background-color: white;
-  width: 500px; /*width: 50%*/
+  width: 500px; 
   height: 95vh;
   top: 10px;
   left: 10px;
@@ -96,20 +111,11 @@ body {
 }
 
 .backgroundStyle {
-  /*background: url("https://i.imgur.com/2grnPtW.gif") no-repeat top center fixed;*/
   background: url("") no-repeat top center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  
-  /*
-  background-image:url("https://i.imgur.com/2grnPtW.gif");
-  background-repeat:no-repeat;
-  background-size:cover;
-  background-position: top left;
-  position: relative;
-  resize: none;*/
 }
 
 /* Full-width input fields */
@@ -168,13 +174,14 @@ a {
   color: dodgerblue;
 }
 
-/* Set a grey background color and center the text of the "sign in" section */
-.signin {
-  background-color: #f1f1f1;
-  text-align: center;
-}
-
+/* animated loading icon */
 .loader {
+  margin:auto;
+  left:0;
+  right:0;
+  top:0;
+  bottom:0;
+  position: absolute;
   border: 16px solid #f3f3f3;
   border-radius: 50%;
   border-top: 16px solid #3498db;
@@ -195,9 +202,28 @@ a {
   100% { transform: rotate(360deg); }
 }
 
+/* Add animation to server response text after hitting submit */
+.animate-bottom {
+  position: relative;
+  -webkit-animation-name: animatebottom;
+  -webkit-animation-duration: 1s;
+  animation-name: animatebottom;
+  animation-duration: 1s
+}
+
+@-webkit-keyframes animatebottom {
+  from { bottom:-100px; opacity:0 } 
+  to { bottom:0px; opacity:1 }
+}
+
+@keyframes animatebottom { 
+  from{ bottom:-100px; opacity:0 } 
+  to{ bottom:0; opacity:1 }
+}
+
 </style>
 </head>
-<body class="backgroundStyle" > <!-- onload="setup()" class="backgroundStyle" -->
+<body class="backgroundStyle" >
 
 <form action="#" accept-charset="UTF-8" onsubmit="sendToDiscordBot(); return false;">
     <div id="container" class="container">
@@ -231,7 +257,7 @@ a {
       <input id="msgidInput" type="hidden" name="msgid">
 
       <hr>
-      <button type="submit" class="registerbtn" style="font-size: 20px">Submit</button> <!--onclick="sendToDiscordBot()" -->
+      <button type="submit" class="registerbtn" style="font-size: 20px">Submit</button> 
     </div>
 </form>
 
@@ -239,6 +265,7 @@ a {
 <script type="text/javascript"> 
   setup();
   backgroundSetup();
+  // Adjust size of the container for mobile devices
   if (window.innerWidth < 600){
     document.getElementById("container").style.width = "98%";
     document.getElementById("container").style.height = "98vh";
