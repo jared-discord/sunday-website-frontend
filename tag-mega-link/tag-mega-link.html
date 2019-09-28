@@ -37,6 +37,37 @@
     document.body.style.backgroundImage = "url('bgimages/" + num + ".gif')"
     //document.body.style.backgroundImage = "url('https://i.imgur.com/2grnPtW.gif')";
   }
+
+  function sendToDiscordBot(){
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        document.getElementById("container").className = "container";
+        //document.getElementById('container').innerHTML = JSON.parse(this.responseText).response;
+        var alert = document.createElement("div");
+        alert.className = "alert alert-success";
+        alert.innerText = JSON.parse(this.responseText).response;
+        document.getElementById('container').appendChild(alert)
+      }
+    }
+    xhttp.open("POST", "http://localhost:8080/post-tagged-mega", true);
+    xhttp.setRequestHeader("Content-type", "application/json");
+    const postData = JSON.stringify({
+      "artist": document.getElementsByName("artist")[0].value,
+      "album": document.getElementsByName("album")[0].value,
+      "filetype": document.getElementsByName("filetype")[0].value,
+      "year": document.getElementsByName("year")[0].value,
+      "genre": document.getElementsByName("genre")[0].value,
+      "description": document.getElementsByName("description")[0].value,
+      "mega": document.getElementsByName("mega")[0].value,
+      "server": document.getElementsByName("server")[0].value,
+      "msgid": document.getElementsByName("msgid")[0].value
+    })
+    document.getElementById("container").innerHTML = "";
+    document.getElementById("container").className = "loader";
+    xhttp.send(postData);
+    return false;
+  }
 </script>
 
 <style>
@@ -142,12 +173,34 @@ a {
   background-color: #f1f1f1;
   text-align: center;
 }
+
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 </style>
 </head>
 <body class="backgroundStyle" > <!-- onload="setup()" class="backgroundStyle" -->
 
-<form action="tag-mega-link.php" method="post" accept-charset="UTF-8">
-    <div id = "container" class="container">
+<form action="#" accept-charset="UTF-8" onsubmit="sendToDiscordBot(); return false;">
+    <div id="container" class="container">
       <p2 style="font-size: 150%;font-weight: bold">Please Add Tags for: </p2>
       <br> <a href="" id="megaLinkText"></a>
       <p>Click submit when you are finished.</p>
@@ -178,7 +231,7 @@ a {
       <input id="msgidInput" type="hidden" name="msgid">
 
       <hr>
-      <button type="submit" class="registerbtn" style="font-size: 20px">Submit</button>
+      <button type="submit" class="registerbtn" style="font-size: 20px">Submit</button> <!--onclick="sendToDiscordBot()" -->
     </div>
 </form>
 
