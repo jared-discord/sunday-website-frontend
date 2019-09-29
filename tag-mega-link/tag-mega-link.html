@@ -63,7 +63,7 @@
     xhttp.onerror = function(e){
       alert("Unknown Error Occured. Server response not received.<br>(The server hosting the bot is probably down)");
     };
-    xhttp.open("POST", "http://localhost:8080/post-tagged-mega", true);
+    xhttp.open("POST", "http://134.209.69.73/:8080/post-tagged-mega", true);
     xhttp.setRequestHeader("Content-type", "application/json");
     const postData = JSON.stringify({
       "artist": document.getElementsByName("artist")[0].value,
