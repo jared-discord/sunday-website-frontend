@@ -83,6 +83,77 @@
     xhttp.send(postData);
     return false;
   }
+
+  function formatDiscogsURL(url){
+    var splitURL = url.split('/');
+    const apiURL = "https://api.discogs.com/" + splitURL[splitURL.length-2] + "s/" + splitURL[splitURL.length-1];
+    return apiURL;
+  }
+
+  function verifyURL(url){
+    if (url.includes("discogs.com") && (url.includes("release") || url.includes("master"))) return true; else return false;
+  }
+
+  function disableDiscogsBtn(){
+    document.getElementById("discogsTagBtn").innerText = "";
+    var discogsLoader = document.createElement("div");
+    discogsLoader.className = "discogsBtnLoader";
+    document.getElementById("discogsTagBtn").appendChild(discogsLoader);
+    document.getElementById("discogsTagBtn").disabled = true;
+  }
+
+  function enableDiscogsBtn(){
+    document.getElementById("discogsTagBtn").innerText = "Tag Using ";
+    var discogsLogo = document.createElement("img");
+    discogsLogo.src = "https://a.discogs.com/134d5f4dea1d067364513f75d020e5a9abb917c7/images/discogs-primary-logo.png";
+    document.getElementById("discogsTagBtn").appendChild(discogsLogo);
+    document.getElementById("discogsTagBtn").disabled = false;
+  }
+
+  function fetchDiscogsTags(){
+    var link = prompt("Enter Discogs Link")
+    if (link == null){
+      return;
+    }
+    const goodLink = verifyURL(link);
+    if (goodLink == false){
+      alert("Invalid Url")
+      return;
+    }
+    disableDiscogsBtn();
+    const apiURL = formatDiscogsURL(link)
+    fetch(apiURL).then((response) => {
+    response.json().then((data) => {
+        //console.log(data);
+        if (data.master_url != undefined){
+          fetch(data.master_url).then((responseMaster) => {
+          responseMaster.json().then((dataMaster) => {
+            applyDiscogsTags(dataMaster);
+          });
+          });
+        }
+        else{
+          applyDiscogsTags(data);
+        }
+    });
+    });
+  }
+
+  function applyDiscogsTags(data){
+    //console.log(data)
+    var artists = "";
+    for (var i = 0; i < data.artists.length; i++){
+      if (i != 0){
+        artists += ", ";
+      }
+      artists += data.artists[i].name;
+    }
+    if (data.artists != undefined) document.getElementsByName("artist")[0].value = artists;
+    if (data.title != undefined) document.getElementsByName("album")[0].value = data.title;
+    if (data.year != 0) document.getElementsByName("year")[0].value = data.year;
+    if (data.styles != undefined) document.getElementsByName("genre")[0].value = data.styles.join(", ");
+    enableDiscogsBtn()
+  }
 </script>
 
 <style>
@@ -163,11 +234,18 @@ hr {
   cursor: pointer;
   width: 100%;
   opacity: 0.9;
+  padding: 1px 6px 1px 6px;
+  line-height: 53px;
 }
 
 .registerbtn:hover {
   opacity: 1;
 }
+
+.registerbtn img{
+    width: 70px;
+        vertical-align: middle;
+}​
 
 /* Add a blue text color to links */
 a {
@@ -189,6 +267,20 @@ a {
   height: 120px;
   -webkit-animation: spin 2s linear infinite; /* Safari */
   animation: spin 2s linear infinite;
+}
+
+/* animated loading icon */
+.discogsBtnLoader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 53px;
+  height: 53px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+  outline: none;
+  margin:0 auto;
+  display:block;
 }
 
 /* Safari */
@@ -228,8 +320,11 @@ a {
 <form action="#" accept-charset="UTF-8" onsubmit="sendToDiscordBot(); return false;">
     <div id="container" class="container">
       <p2 style="font-size: 150%;font-weight: bold">Please Add Tags for: </p2>
-      <br> <a href="" id="megaLinkText"></a>
-      <p>Click submit when you are finished.</p>
+      <br> <a href="" id="megaLinkText"></a><br>
+      <button id="discogsTagBtn" type="button" class="registerbtn" style="font-size: 20px" onclick="fetchDiscogsTags()">
+        Tag Using
+        <img src="https://a.discogs.com/134d5f4dea1d067364513f75d020e5a9abb917c7/images/discogs-primary-logo.png">
+      </button> 
       <hr>
 
       <label for="Artist"><b>Artist</b></label>
