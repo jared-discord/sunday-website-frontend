@@ -1,4 +1,4 @@
-function getUrlVars() {
+ld onfunction getUrlVars() {
   var vars = {};
   var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
       vars[key] = value;
@@ -152,60 +152,4 @@ function applyDiscogsTags(data){
   if (data.year != 0) document.getElementsByName("year")[0].value = data.year;
   if (data.styles != undefined) document.getElementsByName("genre")[0].value = data.styles.join(", ");
   enableDiscogsBtn()
-}
-</script>
-
-</head>
-<body class="backgroundStyle" >
-
-<form action="#" accept-charset="UTF-8" onsubmit="sendToDiscordBot(); return false;">
-  <div id="container" class="container">
-    <p2 style="font-size: 150%;font-weight: bold">Please Add Tags for: </p2>
-    <br> <a href="" id="megaLinkText"></a><br>
-    <button id="discogsTagBtn" type="button" class="registerbtn" style="font-size: 20px" onclick="fetchDiscogsTags()">
-      Tag Using
-      <img src="./resources/discogs-primary-logo.png">
-    </button>
-    <hr>
-
-    <label for="Artist"><b>Artist</b></label>
-    <input type="text" placeholder="Enter Artist" name="artist" required>
-
-    <label for="Album"><b>Album</b></label>
-    <input type="text" placeholder="Enter Album Title" name="album" required>
-
-    <label for="FileType"><b>File Type</b></label>
-    <input type="text" placeholder="Enter File Type" name="filetype" required>
-
-    <label for="Year"><b>Year (Optional)</b></label>
-    <input type="number" placeholder="Enter Year Released" name="year" >
-
-    <label for="Genre"><b>Genre (Optional)</b></label>
-    <input type="text" placeholder="Enter Genre" name="genre" >
-
-    <label for="Description"><b>Description (Optional)</b></label><br>
-    <textarea name="description" placeholder="Enter Description"></textarea>
-
-    <input id="megaInput" type="hidden" name="mega">
-
-    <input id="serverInput" type="hidden" name="server">
-
-    <input id="msgidInput" type="hidden" name="msgid">
-
-    <hr>
-    <button type="submit" class="registerbtn" style="font-size: 20px">Submit</button>
-  </div>
-</form>
-
-</body>
-<script type="text/javascript">
-setup();
-backgroundSetup();
-// Adjust size of the container for mobile devices
-if (window.innerWidth < 600){
-  document.getElementById("container").style.width = "98%";
-  document.getElementById("container").style.height = "98vh";
-  document.getElementById("container").style.top = "0px";
-  document.getElementById("container").style.left = "0px";
-  document.getElementById("container").style.margin = "auto";
 }
