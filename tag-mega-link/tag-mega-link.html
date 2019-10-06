@@ -109,7 +109,7 @@
   function enableDiscogsBtn(){
     document.getElementById("discogsTagBtn").innerText = "Tag Using ";
     var discogsLogo = document.createElement("img");
-    discogsLogo.src = "https://a.discogs.com/134d5f4dea1d067364513f75d020e5a9abb917c7/images/discogs-primary-logo.png";
+    discogsLogo.src = "./resources/discogs-primary-logo.png";
     document.getElementById("discogsTagBtn").appendChild(discogsLogo);
     document.getElementById("discogsTagBtn").disabled = false;
   }
@@ -329,7 +329,7 @@ a {
       <br> <a href="" id="megaLinkText"></a><br>
       <button id="discogsTagBtn" type="button" class="registerbtn" style="font-size: 20px" onclick="fetchDiscogsTags()">
         Tag Using
-        <img src="https://a.discogs.com/134d5f4dea1d067364513f75d020e5a9abb917c7/images/discogs-primary-logo.png">
+        <img src="./resources/discogs-primary-logo.png">
       </button> 
       <hr>
 
