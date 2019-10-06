@@ -84,16 +84,19 @@
     return false;
   }
 
+  // reformats discogs url to discogs api url format
   function formatDiscogsURL(url){
     var splitURL = url.split('/');
     const apiURL = "https://api.discogs.com/" + splitURL[splitURL.length-2] + "s/" + splitURL[splitURL.length-1];
     return apiURL;
   }
 
-  function verifyURL(url){
+  // verfiys is a url is a discogs releases or master url
+  function verifyDiscogsURL(url){
     if (url.includes("discogs.com") && (url.includes("release") || url.includes("master"))) return true; else return false;
   }
 
+  // disables the discogs tagging button and inserts a loading icon inside it
   function disableDiscogsBtn(){
     document.getElementById("discogsTagBtn").innerText = "";
     var discogsLoader = document.createElement("div");
@@ -102,6 +105,7 @@
     document.getElementById("discogsTagBtn").disabled = true;
   }
 
+  // enables the discogs tagging button
   function enableDiscogsBtn(){
     document.getElementById("discogsTagBtn").innerText = "Tag Using ";
     var discogsLogo = document.createElement("img");
@@ -110,12 +114,13 @@
     document.getElementById("discogsTagBtn").disabled = false;
   }
 
+  // fetch tags from a discogs link
   function fetchDiscogsTags(){
     var link = prompt("Enter Discogs Link")
     if (link == null){
       return;
     }
-    const goodLink = verifyURL(link);
+    const goodLink = verifyDiscogsURL(link);
     if (goodLink == false){
       alert("Invalid Url")
       return;
@@ -139,6 +144,7 @@
     });
   }
 
+  // set inputs in form using fetched tags from discogs
   function applyDiscogsTags(data){
     //console.log(data)
     var artists = "";
