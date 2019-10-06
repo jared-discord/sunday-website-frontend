@@ -1,0 +1,155 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: black;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Add padding to containers */
+.container {
+  padding: 16px;
+  background-color: white;
+  width: 500px;
+  height: 95vh;
+  top: 10px;
+  left: 10px;
+  position: relative;
+  opacity: 0.9;
+  box-shadow: 8px 4px 8px 0 rgba(0, 0, 0, 0.2), 8px 6px 20px 0 rgba(0, 0, 0, 0.19);
+  resize:both;
+  overflow:auto;
+}
+
+.backgroundStyle {
+  background: url("") no-repeat top center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+/* Full-width input fields */
+input[type=text], input[type=password], input[type=number] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+input[type=text]:focus, input[type=password]:focus, input[type=number]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Overwrite default styles of textarea */
+textarea{
+  padding: 15px;
+  margin: 5px 0 0 0;
+  width: 100%;
+  background: #f1f1f1;
+  font-family: Arial;
+  border: none;
+  height: 100px
+}
+
+textarea:focus{
+  background: #ddd;
+}
+
+/* Overwrite default styles of hr */
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 20px;
+}
+
+/* Set a style for the submit button */
+.registerbtn {
+  background-color: #e5d6f3;
+  padding: 16px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+  padding: 1px 6px 1px 6px;
+  line-height: 53px;
+}
+
+.registerbtn:hover {
+  opacity: 1;
+}
+
+.registerbtn img{
+    width: 70px;
+        vertical-align: middle;
+}​
+
+/* Add a blue text color to links */
+a {
+  color: dodgerblue;
+}
+
+/* animated loading icon */
+.loader {
+  margin:auto;
+  left:0;
+  right:0;
+  top:0;
+  bottom:0;
+  position: absolute;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+
+/* animated loading icon */
+.discogsBtnLoader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 53px;
+  height: 53px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+  outline: none;
+  margin:0 auto;
+  display:block;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Add animation to server response text after hitting submit */
+.animate-bottom {
+  position: relative;
+  -webkit-animation-name: animatebottom;
+  -webkit-animation-duration: 1s;
+  animation-name: animatebottom;
+  animation-duration: 1s
+}
+
+@-webkit-keyframes animatebottom {
+  from { bottom:-100px; opacity:0 }
+  to { bottom:0px; opacity:1 }
+}
+
+@keyframes animatebottom {
+  from{ bottom:-100px; opacity:0 }
+  to{ bottom:0; opacity:1 }
+}
